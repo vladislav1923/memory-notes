@@ -12,6 +12,18 @@
 </head>
 
 <body>
-	<script src='bundle.js'></script>
+<div id="content"></div>
+<script>
+	function hndlr(response) {
+		for (var i = 0; i < response.items.length; i++) {
+			var item = response.items[i];
+			// in production code, item.htmlTitle should have the HTML entities escaped.
+			document.getElementById("content").innerHTML += "<br>" + item.htmlTitle;
+		}
+	}
+</script>
+<script src="https://www.googleapis.com/customsearch/v1?key=AIzaSyDHro9hAXAJ_4OclK1pY6v9DbrRcFyWVOg&amp;cx=008787572615841022576:hg6mha39ofu&amp;q=cars&amp;callback=hndlr
+                ">
+</script>
 </body>
 </html>
