@@ -13,9 +13,9 @@ async function bootstrap() {
 
   if (env === 'production') {
     httpsOptions = {
-      key: fs.readFileSync('/etc/letsencrypt/live/yourdomain.com/privkey.pem', 'utf8'),
-      cert: fs.readFileSync('/etc/letsencrypt/live/yourdomain.com/cert.pem', 'utf8'),
-      ca: fs.readFileSync('/etc/letsencrypt/live/yourdomain.com/chain.pem', 'utf8')
+      key: fs.readFileSync('/etc/letsencrypt/live/memory-notes.ru/privkey.pem', 'utf8'),
+      cert: fs.readFileSync('/etc/letsencrypt/live/memory-notes.ru/cert.pem', 'utf8'),
+      ca: fs.readFileSync('/etc/letsencrypt/live/memory-notes.ru/chain.pem', 'utf8')
     };
   }
   
