@@ -1,6 +1,6 @@
 import {NestFactory} from '@nestjs/core';
 import {ExpressAdapter} from '@nestjs/platform-express';
-import {AppModule} from './app.module';
+import {ServerModule} from './server.module';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as express from 'express';
@@ -20,7 +20,7 @@ async function bootstrap() {
   
   const server = express();
   const app = await NestFactory.create(
-    AppModule,
+    ServerModule,
     new ExpressAdapter(server),
   );
   app.use(express.static(path.join(__dirname,  'public')));
