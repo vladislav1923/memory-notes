@@ -13,8 +13,9 @@ async function bootstrap() {
 
   if (env === 'production') {
     httpsOptions = {
-      key: fs.readFileSync('./secrets/private-key.pem'),
-      cert: fs.readFileSync('./secrets/public-certificate.pem'),
+      key: fs.readFileSync('/etc/letsencrypt/live/yourdomain.com/privkey.pem', 'utf8'),
+      cert: fs.readFileSync('/etc/letsencrypt/live/yourdomain.com/cert.pem', 'utf8'),
+      ca: fs.readFileSync('/etc/letsencrypt/live/yourdomain.com/chain.pem', 'utf8')
     };
   }
   
@@ -23,7 +24,7 @@ async function bootstrap() {
     ServerModule,
     new ExpressAdapter(server),
   );
-  app.use(express.static(path.join(__dirname,  'public')));
+  app.use(express.static('public'));
   app.use(express.static(__dirname, { dotfiles: 'allow' } ));
   await app.init();
   
