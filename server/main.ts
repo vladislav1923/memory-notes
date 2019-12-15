@@ -24,6 +24,7 @@ async function bootstrap() {
     new ExpressAdapter(server),
   );
   app.use(express.static(path.join(__dirname,  'public')));
+  app.use(express.static(__dirname, { dotfiles: 'allow' } ));
   await app.init();
   
   http.createServer(server).listen(3000);
