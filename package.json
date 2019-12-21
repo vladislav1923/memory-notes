@@ -5,6 +5,7 @@
   "author": "",
   "license": "MIT",
   "scripts": {
+    "build": "npm run serverBrebuild && npm run serverBuild && npm run webBuild",
     "serverBrebuild": "rimraf dist",
     "serverBuild": "nest build",
     "serverFormat": "prettier --write \"server/**/*.ts\" \"test/**/*.ts\"",

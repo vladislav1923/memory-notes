@@ -7,6 +7,13 @@ const app = new App({
 	}
 });
 
+const xhr = new XMLHttpRequest();
+xhr.open('GET', '/images?query=woman');
+xhr.send();
+xhr.onload((res) => {
+	console.log(res);
+});
+
 window.app = app;
 
 export default app;

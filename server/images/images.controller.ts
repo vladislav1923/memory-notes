@@ -11,11 +11,11 @@ export class ImagesController {
   }
 
   @Get()
-  public search(@Query('query') query: string): string | void {
+  public async search(@Query('query') query: string): Promise<string | void> {
     if (!query) {
       throw new HttpException('Query param not found', HttpStatus.BAD_REQUEST);
     }
 
-    this.imagesService.getImagesFromGoogleSearch(query);
+    return await this.imagesService.getImagesFromGoogleSearch(query);
   }
 }
