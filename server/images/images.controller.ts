@@ -12,6 +12,8 @@ export class ImagesController {
 
   @Get()
   public async search(@Query('query') query: string): Promise<string | void> {
+    console.log(query);
+
     if (!query) {
       throw new HttpException('Query param not found', HttpStatus.BAD_REQUEST);
     }
