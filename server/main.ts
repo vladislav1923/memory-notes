@@ -28,10 +28,14 @@ async function bootstrap() {
   app.use(express.static(__dirname, { dotfiles: 'allow' } ));
   await app.init();
 
-  http.createServer((req, res) => {
-    res.writeHead(301, { Location: 'https://' + req.headers.host + req.url });
-    res.end();
-  }).listen(3000);
+  if (env === 'production') {
+    http.createServer((req, res) => {
+      res.writeHead(301, { Location: 'https://' + req.headers.host + req.url });
+      res.end();
+    }).listen(3000);
+  } else {
+    http.createServer(server).listen(3000);
+  }
   https.createServer(httpsOptions, server).listen(443);
 }
 bootstrap();

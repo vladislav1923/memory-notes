@@ -1,6 +1,6 @@
 import {Injectable} from '@nestjs/common';
 import {ConfigService} from '../config/config.service';
-import * as GoogleImages from 'image-search-google';
+import * as GoogleImages from 'google-search-results-nodejs';
 
 @Injectable()
 export class ImagesService {
@@ -10,19 +10,15 @@ export class ImagesService {
 
   constructor(configService: ConfigService) {
     this.configService = configService;
-    this.client = new GoogleImages(this.configService.getGoogleCseId(), this.configService.getGoogleApiKey());
+    this.client = new GoogleImages.GoogleSearchResults(this.configService.getGoogleApiKey());
   }
 
   public async getImagesFromGoogleSearch(query: string) {
-      this.client.search(query, {page: 1, safe: 'off'})
-        .then((response) => {
-          console.log(response);
-          return response;
-        })
-        .catch((e) => {
-          console.log(e);
-          return e;
-        });
+      this.client.json({
+        q: query,
+      }, (result) => {
+        console.log(result);
+      });
   }
 
 }
