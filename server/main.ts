@@ -18,7 +18,7 @@ async function bootstrap() {
       ca: fs.readFileSync('/etc/letsencrypt/live/memory-notes.ru/chain.pem', 'utf8')
     };
   }
-  
+
   const server = express();
   const app = await NestFactory.create(
     ServerModule,
@@ -27,8 +27,11 @@ async function bootstrap() {
   app.use(express.static('public'));
   app.use(express.static(__dirname, { dotfiles: 'allow' } ));
   await app.init();
-  
-  http.createServer(server).listen(3000);
+
+  http.createServer((req, res) => {
+    res.writeHead(301, { Location: 'https://' + req.headers.host + req.url });
+    res.end();
+  }).listen(3000);
   https.createServer(httpsOptions, server).listen(443);
 }
 bootstrap();
